@@ -1,0 +1,5 @@
+__pycache__
+build
+dist
+main.spec
+res/preview_img_resized.png
