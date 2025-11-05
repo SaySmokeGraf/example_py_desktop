@@ -30,4 +30,4 @@ class Ui_PreviewWin(object):
 
     def retranslateUi(self, PreviewWin):
         _translate = QtCore.QCoreApplication.translate
-        PreviewWin.setWindowTitle(_translate("PreviewWin", "Пример десктопной программы на Python"))
+        PreviewWin.setWindowTitle(_translate("PreviewWin", "Рабочие зоны"))

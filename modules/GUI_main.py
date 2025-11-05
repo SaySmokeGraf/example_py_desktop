@@ -894,7 +894,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Пример десктопной программы на Python"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Рабочие зоны"))
         self.lbl_to_morph_into_graph_m_1.setText(_translate("MainWindow", "TextLabel"))
         self.groupBox_coords_m_1.setTitle(_translate("MainWindow", "Координаты маяков"))
         self.label_x1_m_1.setText(_translate("MainWindow", "X2"))
