@@ -4,14 +4,13 @@
 подпрограммами проекта.
 """
 
-import sys, os.path
+import sys
 
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QPixmap
-from PIL import Image
 
-from config import *
+from config import PATH_IMG_SIZED, TIME_PREVIEW
 from ui.mainlogicGUI import Ui_Main_Upgraded
 from ui.previewGUI import Ui_PreviewWin
 
@@ -27,15 +26,7 @@ class PreviewWindow(QtWidgets.QFrame):
         super().__init__()
         self.ui = Ui_PreviewWin()
         self.ui.setupUi(self)
-
-        # создание картинки с измененным под ГПИ размером по необходимости
-        if os.path.exists(path_img_new):
-            self.ui.lbl_image.setPixmap(QPixmap(path_img_new))
-        else:
-            image = Image.open(path_img)
-            resized_image = image.resize(IMG_SIZES)
-            resized_image.save(path_img_new)
-            self.ui.lbl_image.setPixmap(QPixmap(path_img_new))
+        self.ui.lbl_image.setPixmap(QPixmap(PATH_IMG_SIZED))
 
 
 class MainWindow(QtWidgets.QMainWindow):
