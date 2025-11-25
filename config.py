@@ -1,5 +1,8 @@
 """Конфигурационный скрипт."""
 
+# иконка
+PATH_ICON = 'res/icon.png'
+
 # параметры для заставки
 IMG_SIZES = (900, 506)
 PATH_IMG_ORIG = 'res/preview_img_orig.jpg'
