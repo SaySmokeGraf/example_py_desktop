@@ -1,14 +1,11 @@
-"""
-Главная программа проекта.
-Задает окно, вызывает и управляет прочими подпрограммами проекта.
+"""Главная точка входа в программу.
 
-Классы:
-    MainWindow
-
-Функции:
-    start_main_window() -> None
+Содержит описание окон. Задает окно, вызывает и управляет прочими
+подпрограммами проекта.
 """
+
 import sys, os.path
+
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QPixmap
@@ -20,25 +17,12 @@ from ui.previewGUI import Ui_PreviewWin
 
 
 class PreviewWindow(QtWidgets.QFrame):
-    """
-    Класс окна заставки.
+    """Класс окна заставки."""
 
-    Атрибуты:
-    ---------
-    None
+    def __init__(self) -> None:
+        """Инициализация экземляра класса.
 
-    Методы:
-    -------
-    None
-    """
-    def __init__(self):
-        """
-        Инициализация экземляра класса.
         Задает ГПИ окна и необходимые значения атрибутов.
-
-        Параметры:
-        ----------
-        None
         """
         super().__init__()
         self.ui = Ui_PreviewWin()
@@ -53,50 +37,25 @@ class PreviewWindow(QtWidgets.QFrame):
             resized_image.save(path_img_new)
             self.ui.lbl_image.setPixmap(QPixmap(path_img_new))
 
+
 class MainWindow(QtWidgets.QMainWindow):
-    """
-    Класс для главного окна програмы с ГПИ и его логикой.
+    """Класс для главного окна програмы с ГПИ и его логикой."""
 
-    Атрибуты:
-    ---------
-    None
+    def __init__(self) -> None:
+        """Инициализация экземляра класса.
 
-    Методы:
-    -------
-    None
-    """
-
-    def __init__(self):
-        """
-        Инициализация экземляра класса.
         Задает ГПИ окна и необходимые значения атрибутов.
-
-        Параметры:
-        ----------
-        None
         """
         super().__init__()
         self.ui = Ui_Main_Upgraded()
         self.ui.setupUi(self)
 
 
-def start_main_window():
-    """
-    Запускает главное окно. Привязывается к окончанию отсчета таймера.
-    Помимо прочего, удаляет таймер и закрывает окно заставки.
+def start_main_window() -> None:
+    """Запускает главное окно.
 
-    Параметры:
-    ----------
-    window : PyQt5.QtWidgets.QMainWindow
-        (global) Главное окно программы.
-    timer : PyQt5.QtCore.QTimer
-        (global) Таймер, к которому подвязан вызов данной функции.
-    prewin : PyQt5.QtWidgets.QFrame
-        (global) Окно заставки.
-    
-    Возвращаемое значение:
-    ----------------------
-    None
+    Привязывается к окончанию отсчета таймера. Помимо прочего, удаляет таймер и
+    закрывает окно заставки.
     """
     global window, timer, prewin
 
@@ -112,6 +71,8 @@ def start_main_window():
                         QtCore.Qt.WindowCloseButtonHint)
     window.show()
 
+
+# главная точка входа в программу
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setAttribute(QtCore.Qt.AA_Use96Dpi)

@@ -1,75 +1,31 @@
-"""
-Модуль с ГПИ для проекта.
-Дорабатывает автоматически созданный ГПИ (Qt Designer + pyuic5) и задает
-логику отработки элементов.
+"""Модуль с ГПИ для проекта.
 
-Классы:
-    Ui_Main_Upgraded
+Дорабатывает автоматически созданный ГПИ (Qt Designer + pyuic5) и задает логику
+отработки элементов.
 """
+
 import math
+
+from PyQt5.QtWidgets import QMainWindow
 import pyqtgraph as pg
-from PyQt5 import QtCore
-from PyQt5.QtCore import QThread
 
 from ui.mainGUI import Ui_MainWindow
 
 
 class Ui_Main_Upgraded(Ui_MainWindow):
-    """
-    Класс ГПИ и логики отработки элементов ГПИ проекта.
-    Родительский класс: modules.GUI_main.Ui_MainWindow, содержащий ГПИ автоматического
-    производства (Qt Designer + pyuic5).
+    """Класс ГПИ и логики отработки элементов ГПИ проекта.
 
-    Атрибуты:
-    ---------
-    btn_calc_method_1, btn_calc_method_2, btn_calc_method_3 : PyQt5.QtWidgets.QPushButton
-        Кнопки, отвечающие за запуск расчетов по соответствующим методам и последующего
-        обновления графика.
-
-    doubleSpinBox_x1, doubleSpinBox_y1 : PyQt5.QtWidgets.QDoubleSpinBox
-        Поля ввода координат первого маяка (x, y). Тип хранимых данных: double.
-
-    doubleSpinBox_x2, doubleSpinBox_y2 : PyQt5.QtWidgets.QDoubleSpinBox
-        Поля ввода координат второго маяка (x, y). Тип хранимых данных: double.
-
-    doubleSpinBox_sigma_d, doubleSpinBox_sigma_r : PyQt5.QtWidgets.QDoubleSpinBox
-        Поля ввода СКО. Тип хранимых данных: double.
-
-    doubleSpinBox_r : PyQt5.QtWidgets.QDoubleSpinBox
-        Поле ввода параметра r. Тип хранимых данных: double.
-
-    graph : pyqtgraph.PlotWidget
-        Виджет графика.
-
-    plot_data : pyqtgraph.PlotItem
-        Данные на графике, отвечающие за подходящие точки.
-
-    plot_stations : pyqtgraph.PlotItem
-        Данные на графике, отвечающие за точки расположения маяков.
-
-    spinBox_p : PyQt5.QtWidgets.QSpinBox
-        Поле воода параметра P. Тип хранимых данных: int.
-
-    Методы:
-    -------
-    setupUi(MainWindow)
-        Установка элементов и их параметров на ГПИ.
+    Родительский класс содержит автоматически созданный с помощью Qt Designer и
+    pyuic5 ГПИ.
     """
 
-    def setupUi(self, MainWindow):
-        """
-        Установка элементов и их параметров на ГПИ.
+    def setupUi(self, main_window_instance: QMainWindow) -> None:
+        """Установка элементов и их параметров на ГПИ.
 
-        Параметры:
-        ----------
-        MainWindow : PyQt5.QtWidgets.QMainWindow
-            Виджет главного окна.
-
-        Возвращаемое значение:
-        ----------------------
-        None
+        :param main_window_instance: инстанция главного окна
+        :type main_window_instance: QMainWindow
         """
-        super().setupUi(MainWindow)
+        super().setupUi(main_window_instance)
         self.btn_plot_m_1.clicked.connect(self._calculate_method_1)
         self.btn_plot_m_2.clicked.connect(self._calculate_method_2)
         self.btn_plot_m_3.clicked.connect(self._calculate_method_3)
@@ -119,36 +75,21 @@ class Ui_Main_Upgraded(Ui_MainWindow):
             self._set_legend_on_graph(i, True)
             
     
-    def _active_elems_enabled(self, enabled):
-        """
-        Включение/выключение активных (интерактивных) элементов ГПИ.
+    def _active_elems_enabled(self, enabled: bool) -> None:
+        """Включение/выключение активных (интерактивных) элементов ГПИ.
 
-        Параметры:
-        ----------
-        enabled : bool
-            Флаг, по значению которого определяется, включить или выключить
-            активные элементы ГПИ.
-
-        Возвращаемое значение:
-        ----------------------
-        None
+        :param enabled: флаг включенности
+        :type enabled: bool
         """
         self.tabWidget.setEnabled(enabled)
     
-    def _set_legend_on_graph(self, n, enabled):
-        """
-        Установить легенду на графике.
-
-        Параметры:
-        ----------
-        n : int
-            Номер графика от 0 до 2.
-        enabled : bool
-            Флаг, по которому определяется, включить или выключить легенду.
+    def _set_legend_on_graph(self, n: int, enabled: bool) -> None:
+        """Установить легенду на графике.
         
-        Возвращаемое значение:
-        ----------------------
-        None
+        :param n: номер графика от 0 до 2
+        :type n: int
+        :param enabled: флаг включенности легенды
+        :type enabled: bool
         """
         if enabled:
             if self.plot_legends[n] == None:
@@ -162,95 +103,68 @@ class Ui_Main_Upgraded(Ui_MainWindow):
             self.graph[n].scene().removeItem(self.plot_legends[n])
             self.plot_legends[n] = None
 
-    def _upd_legend(self, n):
-        """
-        Обновить состояние легенды на графике.
+    def _upd_legend(self, n: int) -> None:
+        """Обновить состояние легенды на графике.
 
-        Параметры:
-        ----------
-        n : int
-            Номер графика от 0 до 2.
-        
-        Возвращаемое значение:
-        ----------------------
-        None
+        :param n: номер графика от 0 до 2
+        :type n: int
         """
         self._set_legend_on_graph(n, self.checkboxes_leg[n].isChecked())
 
-    def _upd_graph(self, n, X, Y, Xout, Yout, Xm, Ym):
-        """
-        Обновляет данные на графике.
+    def _upd_graph(self, n: int, X: list[float], Y: list[float],
+                   Xout: list[float], Yout: list[float],
+                   Xm: list[float], Ym: list[float]) -> None:
+        """Обновляет данные на графике.
 
-        Параметры:
-        ----------
-        n : int
-            Номер графика (т.е. номер его вкладки) от 0 до 2.
-        X : double[]
-            Список координат X подходящих точек.
-        Y : double[]
-            Список координат Y подходящих точек.
-        Xout : double[]
-            Список координат X контура подходящих точек.
-        Yout : double[]
-            Список координат Y контура подходящих точек.
-        Xm : double[]
-            Список координат X маяков.
-        Ym : double[]
-            Список координат Y маяков.
-
-        Возвращаемое значение:
-        ----------------------
-        None
+        :param n: номер графика от 0 до 2
+        :type n: int
+        :param X: список координат X подходящих точек
+        :type X: list[float]
+        :param Y: список координат Y подходящих точек
+        :type Y: list[float]
+        :param Xout: список координат X контура подходящих точек
+        :type Xout: list[float]
+        :param Yout: список координат Y контура подходящих точек
+        :type Yout: list[float]
+        :param Xm: список координат X маяков
+        :type Xm: list[float]
+        :param Ym: список координат Y маяков
+        :type Ym: list[float]
         """
         self.plot_data[n].setData(X, Y)
         self.plot_outline[n].setData(Xout, Yout)
         self.plot_stations[n].setData(Xm, Ym)
     
-    def _calc_vector_magnitude(self, v):
-        """
-        Расчет модуля двумерного вектора.
+    def _calc_vector_magnitude(self, v: list[float, float]) -> float:
+        """Расчет модуля двумерного вектора
 
-        Параметры:
-        ----------
-        v : float[2]
-            Двумерный вектор.
+        :param v: двумерный вектор
+        :type v: list[float, float]
 
-        Возвращаемое значение:
-        ----------------------
-        _ : float
-            Модуль вектора.
+        :return: модуль вектора
+        :rtype: float
         """
         return math.sqrt(v[0]**2 + v[1]**2)
     
-    def _calc_dot_product(self, v1, v2):
-        """
-        Расчет произведения двумерных векторов.
+    def _calc_dot_product(self, v1: list[float, float],
+                          v2: list[float, float]) -> float:
+        """Расчет произведения двумерных векторов.
 
-        Параметры:
-        ----------
-        v1, v2 : float[2]
-            Двумерные вектора.
+        :param v1: первый двумерный вектор
+        :type v1: list[float, float]
+        :param v2: второй двумерный вектор
+        :type v2: list[float, float]
 
-        Возвращаемое значение:
-        ----------------------
-        _ : float
-            Результат умножения векторов.
+        :return: результат произведения векторов
+        :rtype: float
         """
         return v1[0] * v2[0] + v1[1] * v2[1]
     
-    def _calculate_method_1(self):
-        """
-        Произведение расчета подходящей области и ее контура по методу 1
-        (разностно-дальномерный) и вывод полученного результата на график.
-        На время расчета отключает активные элементы ГПИ.
-
-        Параметры:
-        ----------
-        None
-
-        Возвращаемое значение:
-        ----------------------
-        None
+    def _calculate_method_1(self) -> None:
+        """Расчет рабочей зоны по первому методу (разностно-дальномерный).
+        
+        Производит расчет и выводит полученный результат на график. На время
+        расчета отключает активные элементы ГПИ.
         """
         # отключение активных элементов
         self._active_elems_enabled(False)
@@ -322,19 +236,11 @@ class Ui_Main_Upgraded(Ui_MainWindow):
                         [0, X1, X2], [0, Y1, Y2])
         self._active_elems_enabled(True)
 
-    def _calculate_method_2(self):
-        """
-        Произведение расчета подходящей области и ее контура по методу 2
-        (дальномерный) и вывод полученного результата на график.
-        На время расчета отключает активные элементы ГПИ.
-
-        Параметры:
-        ----------
-        None
-
-        Возвращаемое значение:
-        ----------------------
-        None
+    def _calculate_method_2(self) -> None:
+        """Расчет рабочей зоны по второму методу (дальномерный).
+        
+        Производит расчет и выводит полученный результат на график. На время
+        расчета отключает активные элементы ГПИ.
         """
         # отключение активных элементов
         self._active_elems_enabled(False)
@@ -398,19 +304,11 @@ class Ui_Main_Upgraded(Ui_MainWindow):
                         [A1, B1], [A2, B2])
         self._active_elems_enabled(True)
 
-    def _calculate_method_3(self):
-        """
-        Произведение расчета подходящей области и ее контура по методу 3
-        (угломерный) и вывод полученного результата на график.
-        На время расчета отключает активные элементы ГПИ.
-
-        Параметры:
-        ----------
-        None
-
-        Возвращаемое значение:
-        ----------------------
-        None
+    def _calculate_method_3(self) -> None:
+        """Расчет рабочей зоны по третьему методу (угломерный).
+        
+        Производит расчет и выводит полученный результат на график. На время
+        расчета отключает активные элементы ГПИ.
         """
         # отключение активных элементов
         self._active_elems_enabled(False)
