@@ -15,8 +15,8 @@ from PyQt5.QtGui import QPixmap
 from PIL import Image
 
 from config import *
-from modules.GUI_logic import Ui_Main_Upgraded
-from modules.GUI_preview import Ui_PreviewWin
+from ui.mainlogicGUI import Ui_Main_Upgraded
+from ui.previewGUI import Ui_PreviewWin
 
 
 class PreviewWindow(QtWidgets.QFrame):

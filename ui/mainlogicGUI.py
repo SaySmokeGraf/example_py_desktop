@@ -11,7 +11,7 @@ import pyqtgraph as pg
 from PyQt5 import QtCore
 from PyQt5.QtCore import QThread
 
-from modules.GUI_main import Ui_MainWindow
+from ui.mainGUI import Ui_MainWindow
 
 
 class Ui_Main_Upgraded(Ui_MainWindow):
