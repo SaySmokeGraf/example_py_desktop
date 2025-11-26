@@ -8,9 +8,8 @@ import sys
 
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtGui import QIcon
 
-from config import PATH_ICON, TIME_PREVIEW
+from config import TIME_PREVIEW
 from wins.main_win import MainWindow
 from wins.preview_win import PreviewWindow
 
@@ -33,7 +32,6 @@ def start_main_window() -> None:
                                QtCore.Qt.WindowMinimizeButtonHint |
                                QtCore.Qt.WindowMaximizeButtonHint |
                                QtCore.Qt.WindowCloseButtonHint)
-    main_window.setWindowIcon(QIcon(PATH_ICON))
     main_window.show()
 
 
