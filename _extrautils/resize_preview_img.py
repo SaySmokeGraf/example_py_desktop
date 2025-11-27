@@ -13,12 +13,12 @@ PATH_IMG_SIZED = 'res/preview_img_sized.png'
 
 # создание картинки с измененным под ГПИ размером по необходимости
 if __name__ == "__main__":
-    print('Меняем размер изображения...')
+    print('Resizing...')
     if os.path.exists(PATH_IMG_ORIG):
         image = Image.open(PATH_IMG_ORIG)
         resized_image = image.resize(IMG_SIZES)
         resized_image.save(PATH_IMG_SIZED)
-        print('Новый файл создан. Размер изменен!')
+        print(f'Resizing into {PATH_IMG_SIZED} completed!')
     else:
-        print(f'Отсутствует файл: {PATH_IMG_ORIG}. Процесс не завершен!')
-    input('Введите Enter, чтобы выйти.')
+        print(f'ERROR: No such file: {PATH_IMG_ORIG}.')
+    input('Press Enter to exit...')

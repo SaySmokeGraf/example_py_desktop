@@ -1,8 +1,8 @@
 @echo off
-echo Конвертация ui в py...
+echo Converting ui to py...
 
 pyuic5 ui/mainGUI.ui -o ui/mainGUI.py
 pyuic5 ui/previewGUI.ui -o ui/previewGUI.py
 
-echo Конвертация завершена!
+echo Converting completed!
 pause
