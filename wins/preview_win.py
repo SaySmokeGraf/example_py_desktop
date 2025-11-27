@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
 
 from config import PATH_IMG_SIZED
-from ui.previewGUI import Ui_PreviewWin
+from ui.previewGUI import Ui_PreviewWindow
 
 
 class PreviewWindow(QtWidgets.QFrame):
@@ -16,7 +16,7 @@ class PreviewWindow(QtWidgets.QFrame):
         Задает ГПИ окна и необходимые значения атрибутов.
         """
         super().__init__()
-        self.ui = Ui_PreviewWin()
+        self.ui = Ui_PreviewWindow()
         self.ui.setupUi(self)
         self.ui.lbl_image.setPixmap(QPixmap(PATH_IMG_SIZED))
 

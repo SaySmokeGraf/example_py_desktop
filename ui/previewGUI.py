@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'modules/GUI_preview.ui'
+# Form implementation generated from reading ui file 'ui/previewGUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -11,23 +11,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_PreviewWin(object):
-    def setupUi(self, PreviewWin):
-        PreviewWin.setObjectName("PreviewWin")
-        PreviewWin.resize(922, 528)
-        PreviewWin.setMinimumSize(QtCore.QSize(922, 528))
-        PreviewWin.setMaximumSize(QtCore.QSize(922, 528))
-        self.horizontalLayout = QtWidgets.QHBoxLayout(PreviewWin)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lbl_image = QtWidgets.QLabel(PreviewWin)
+class Ui_PreviewWindow(object):
+    def setupUi(self, PreviewWindow):
+        PreviewWindow.setObjectName("PreviewWindow")
+        PreviewWindow.resize(922, 528)
+        PreviewWindow.setMinimumSize(QtCore.QSize(922, 528))
+        PreviewWindow.setMaximumSize(QtCore.QSize(922, 528))
+        self.hlayout_window = QtWidgets.QHBoxLayout(PreviewWindow)
+        self.hlayout_window.setObjectName("hlayout_window")
+        self.lbl_image = QtWidgets.QLabel(PreviewWindow)
         self.lbl_image.setFrameShape(QtWidgets.QFrame.Box)
         self.lbl_image.setText("")
         self.lbl_image.setObjectName("lbl_image")
-        self.horizontalLayout.addWidget(self.lbl_image)
+        self.hlayout_window.addWidget(self.lbl_image)
 
-        self.retranslateUi(PreviewWin)
-        QtCore.QMetaObject.connectSlotsByName(PreviewWin)
+        self.retranslateUi(PreviewWindow)
+        QtCore.QMetaObject.connectSlotsByName(PreviewWindow)
 
-    def retranslateUi(self, PreviewWin):
+    def retranslateUi(self, PreviewWindow):
         _translate = QtCore.QCoreApplication.translate
-        PreviewWin.setWindowTitle(_translate("PreviewWin", "Рабочие зоны"))
+        PreviewWindow.setWindowTitle(_translate("PreviewWindow", "Рабочие зоны"))
