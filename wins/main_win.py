@@ -1,7 +1,7 @@
 """Модуль главного окна."""
 
-from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QCheckBox, QMainWindow
 import pyqtgraph as pg
 
 from config import PATH_ICON
@@ -11,7 +11,7 @@ from utils.methods import (
 )
 
 
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(QMainWindow):
     """Класс для главного окна програмы с ГПИ и его логикой."""
 
     def __init__(self) -> None:
@@ -23,6 +23,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowIcon(QIcon(PATH_ICON))
+
+        # описание создаваемых далее атрибутов класса
+        self._checkboxes_leg: list[QCheckBox]  # чекбоксы вкл/выкл легенд
 
         # дополнительный ГПИ
         self._setup_additional_ui()
@@ -37,57 +40,64 @@ class MainWindow(QtWidgets.QMainWindow):
     
     def _setup_additional_ui(self) -> None:
         """Развернуть дополнительный ГПИ."""
-        # подготавливаем кортежи и списки для расположения графиков в ГПИ
-        # и настройки их элементов и параметров в дальнейшем
-        self.frame_graph = (self.ui.frame_graph_m_1,
-                            self.ui.frame_graph_m_2,
-                            self.ui.frame_graph_m_3)
-        self.lbl_to_morph = [self.ui.lbl_to_morph_into_graph_m_1,
-                             self.ui.lbl_to_morph_into_graph_m_2,
-                             self.ui.lbl_to_morph_into_graph_m_3]
-        self.h_layouts = (self.ui.horizontalLayout_9,
-                          self.ui.horizontalLayout_10,
-                          self.ui.horizontalLayout_14)
-        self.checkboxes_leg = (self.ui.checkBox_legend_m_1,
-                               self.ui.checkBox_legend_m_2,
-                               self.ui.checkBox_legend_m_3)
+        # подготавливаем временные кортежи и списки для расположения графиков
+        self._temp_frames_graph = (self.ui.frame_graph_m_1,
+                                   self.ui.frame_graph_m_2,
+                                   self.ui.frame_graph_m_3)
+        self._temp_lbls_to_morph = [self.ui.lbl_to_morph_into_graph_m_1,
+                                    self.ui.lbl_to_morph_into_graph_m_2,
+                                    self.ui.lbl_to_morph_into_graph_m_3]
+        self._temp_h_layouts = (self.ui.horizontalLayout_9,
+                                self.ui.horizontalLayout_10,
+                                self.ui.horizontalLayout_14)
+
+        # подготавливаем список чекбоксов вкл/выкл легенд
+        self._checkboxes_leg = (self.ui.checkBox_legend_m_1,
+                                self.ui.checkBox_legend_m_2,
+                                self.ui.checkBox_legend_m_3)
         
         # разворачиваем графики
         self._setup_graphs()
     
     def _setup_graphs(self) -> None:
         """Разворачивает все графики для методов."""
+        # цвета графиков
         pg.setConfigOption('background', 'w')
         pg.setConfigOption('foreground', 'k')
 
         # формируем необходимые списки графиков и их элементов
-        self.graph = []
-        self.plot_data = []
-        self.plot_outline = []
-        self.plot_stations = []
-        self.plot_legends = []
+        self._graphs = []
+        self._plot_data = []
+        self._plot_outline = []
+        self._plot_stations = []
+        self._plot_legends = []
 
         # пробежка по 3 методам для разворачивания для них графиков
         for i in range(3):
-            self.h_layouts[i].removeWidget(self.lbl_to_morph[i])
-            self.lbl_to_morph[i].deleteLater()
-            self.lbl_to_morph[i] = None
+            self._temp_h_layouts[i].removeWidget(self._temp_lbls_to_morph[i])
+            self._temp_lbls_to_morph[i].deleteLater()
+            self._temp_lbls_to_morph[i] = None
 
-            self.graph.append(pg.PlotWidget(self.frame_graph[i]))
-            self.h_layouts[i].addWidget(self.graph[i])
-            self.graph[i].setLabel('left', 'Ось Y')
-            self.graph[i].setLabel('bottom', 'Ось X')
-            self.graph[i].showGrid(x=True, y=True)
+            self._graphs.append(pg.PlotWidget(self._temp_frames_graph[i]))
+            self._temp_h_layouts[i].addWidget(self._graphs[i])
+            self._graphs[i].setLabel('left', 'Ось Y')
+            self._graphs[i].setLabel('bottom', 'Ось X')
+            self._graphs[i].showGrid(x=True, y=True)
 
-            self.plot_data.append(self.graph[i].plot([], [], pen=None, symbol='o', symbolSize=5,
+            self._plot_data.append(self._graphs[i].plot([], [], pen=None, symbol='o', symbolSize=5,
                                   symbolPen='b', symbolBrush='b', name='Подходящая область'))
-            self.plot_outline.append(self.graph[i].plot([], [], pen=None, symbol='o', symbolSize=5,
+            self._plot_outline.append(self._graphs[i].plot([], [], pen=None, symbol='o', symbolSize=5,
                                   symbolPen='k', symbolBrush='k', name='Контур подходящей области'))
-            self.plot_stations.append(self.graph[i].plot([], [], pen=None, symbol='t1', symbolSize=20,
+            self._plot_stations.append(self._graphs[i].plot([], [], pen=None, symbol='t1', symbolSize=20,
                                       symbolPen='r', symbolBrush='r', name='Маяки'))
             
-            self.plot_legends.append(None)
+            self._plot_legends.append(None)
             self._set_legend_on_graph(i, True)
+        
+        # удаляем временные списки и кортежи
+        del self._temp_frames_graph
+        del self._temp_h_layouts
+        del self._temp_lbls_to_morph
 
     def _set_legend_on_graph(self, n: int, enabled: bool) -> None:
         """Установить легенду на графике.
@@ -98,16 +108,16 @@ class MainWindow(QtWidgets.QMainWindow):
         :type enabled: bool
         """
         if enabled:
-            if self.plot_legends[n] == None:
-                self.plot_legends[n] = pg.LegendItem((80,60), offset=(70,20), frame=True, brush='w')
-                self.plot_legends[n].setParentItem(self.graph[n].graphicsItem())
-                self.plot_legends[n].addItem(self.plot_data[n], 'Подходящая область')
-                self.plot_legends[n].addItem(self.plot_outline[n], 'Контур подходящей области')
-                self.plot_legends[n].addItem(self.plot_stations[n], 'Маяки')
-                self.plot_legends[n].setZValue(1)
+            if self._plot_legends[n] == None:
+                self._plot_legends[n] = pg.LegendItem((80,60), offset=(70,20), frame=True, brush='w')
+                self._plot_legends[n].setParentItem(self._graphs[n].graphicsItem())
+                self._plot_legends[n].addItem(self._plot_data[n], 'Подходящая область')
+                self._plot_legends[n].addItem(self._plot_outline[n], 'Контур подходящей области')
+                self._plot_legends[n].addItem(self._plot_stations[n], 'Маяки')
+                self._plot_legends[n].setZValue(1)
         else:
-            self.graph[n].scene().removeItem(self.plot_legends[n])
-            self.plot_legends[n] = None
+            self._graphs[n].scene().removeItem(self._plot_legends[n])
+            self._plot_legends[n] = None
     
     def _active_elems_enabled(self, enabled: bool) -> None:
         """Включение/выключение активных (интерактивных) элементов ГПИ.
@@ -123,7 +133,7 @@ class MainWindow(QtWidgets.QMainWindow):
         :param n: номер графика от 0 до 2
         :type n: int
         """
-        self._set_legend_on_graph(n, self.checkboxes_leg[n].isChecked())
+        self._set_legend_on_graph(n, self._checkboxes_leg[n].isChecked())
     
     def _upd_graph(self, n: int, X: list[float], Y: list[float],
                    Xout: list[float], Yout: list[float],
@@ -145,9 +155,9 @@ class MainWindow(QtWidgets.QMainWindow):
         :param Ym: список координат Y маяков
         :type Ym: list[float]
         """
-        self.plot_data[n].setData(X, Y)
-        self.plot_outline[n].setData(Xout, Yout)
-        self.plot_stations[n].setData(Xm, Ym)
+        self._plot_data[n].setData(X, Y)
+        self._plot_outline[n].setData(Xout, Yout)
+        self._plot_stations[n].setData(Xm, Ym)
     
     def _calculate_method_1(self) -> None:
         """Расчет рабочей зоны по первому методу (разностно-дальномерный).
