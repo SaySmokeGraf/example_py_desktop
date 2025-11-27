@@ -21,8 +21,8 @@ class MainWindow(QMainWindow):
         Задает ГПИ окна и необходимые значения атрибутов.
         """
         super().__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self._ui = Ui_MainWindow()
+        self._ui.setupUi(self)
         self.setWindowIcon(QIcon(PATH_ICON))
 
         # описание создаваемых далее атрибутов класса
@@ -33,30 +33,30 @@ class MainWindow(QMainWindow):
         self._setup_additional_ui()
 
         # сигналы
-        self.ui.btn_plot_m_1.clicked.connect(self._calculate_method_1)
-        self.ui.btn_plot_m_2.clicked.connect(self._calculate_method_2)
-        self.ui.btn_plot_m_3.clicked.connect(self._calculate_method_3)
-        self.ui.checkBox_legend_m_1.stateChanged.connect(lambda: self._upd_legend(0))
-        self.ui.checkBox_legend_m_2.stateChanged.connect(lambda: self._upd_legend(1))
-        self.ui.checkBox_legend_m_3.stateChanged.connect(lambda: self._upd_legend(2))
+        self._ui.btn_plot_m_1.clicked.connect(self._calculate_method_1)
+        self._ui.btn_plot_m_2.clicked.connect(self._calculate_method_2)
+        self._ui.btn_plot_m_3.clicked.connect(self._calculate_method_3)
+        self._ui.checkBox_legend_m_1.stateChanged.connect(lambda: self._upd_legend(0))
+        self._ui.checkBox_legend_m_2.stateChanged.connect(lambda: self._upd_legend(1))
+        self._ui.checkBox_legend_m_3.stateChanged.connect(lambda: self._upd_legend(2))
     
     def _setup_additional_ui(self) -> None:
         """Развернуть дополнительный ГПИ."""
         # подготавливаем временные кортежи и списки для расположения графиков
-        self._temp_frames_graph = (self.ui.frame_graph_m_1,
-                                   self.ui.frame_graph_m_2,
-                                   self.ui.frame_graph_m_3)
-        self._temp_lbls_to_morph = [self.ui.lbl_to_morph_into_graph_m_1,
-                                    self.ui.lbl_to_morph_into_graph_m_2,
-                                    self.ui.lbl_to_morph_into_graph_m_3]
-        self._temp_h_layouts = (self.ui.horizontalLayout_9,
-                                self.ui.horizontalLayout_10,
-                                self.ui.horizontalLayout_14)
+        self._temp_frames_graph = (self._ui.frame_graph_m_1,
+                                   self._ui.frame_graph_m_2,
+                                   self._ui.frame_graph_m_3)
+        self._temp_lbls_to_morph = [self._ui.lbl_to_morph_into_graph_m_1,
+                                    self._ui.lbl_to_morph_into_graph_m_2,
+                                    self._ui.lbl_to_morph_into_graph_m_3]
+        self._temp_h_layouts = (self._ui.horizontalLayout_9,
+                                self._ui.horizontalLayout_10,
+                                self._ui.horizontalLayout_14)
 
         # подготавливаем список чекбоксов вкл/выкл легенд
-        self._checkboxes_leg = (self.ui.checkBox_legend_m_1,
-                                self.ui.checkBox_legend_m_2,
-                                self.ui.checkBox_legend_m_3)
+        self._checkboxes_leg = (self._ui.checkBox_legend_m_1,
+                                self._ui.checkBox_legend_m_2,
+                                self._ui.checkBox_legend_m_3)
         
         # разворачиваем графики
         self._setup_graphs()
@@ -70,7 +70,8 @@ class MainWindow(QMainWindow):
         # формируем список менеджеров графиков
         self._graph_managers = []
 
-        # пробежка по 3 методам для разворачивания для них графиков
+        # пробежка по 3 методам с заменой лейблов, созданных для этой цели, на
+        # графики с дальнейшей их разверткой и менеджерами графиков
         for i in range(3):
             self._temp_h_layouts[i].removeWidget(self._temp_lbls_to_morph[i])
             self._temp_lbls_to_morph[i].deleteLater()
@@ -91,7 +92,7 @@ class MainWindow(QMainWindow):
         :param enabled: флаг включенности
         :type enabled: bool
         """
-        self.ui.tabWidget.setEnabled(enabled)
+        self._ui.tabWidget.setEnabled(enabled)
     
     def _upd_legend(self, n: int) -> None:
         """Обновить состояние легенды на графике.
@@ -111,17 +112,17 @@ class MainWindow(QMainWindow):
         # отключение активных элементов
         self._active_elems_enabled(False)
 
-        # координаты
-        X2, Y2 = self.ui.doubleSpinBox_x1_m_1.value(), self.ui.doubleSpinBox_y1_m_1.value()
-        X3, Y3 = self.ui.doubleSpinBox_x2_m_1.value(), self.ui.doubleSpinBox_y2_m_1.value()
+        # параметры построения графика
+        X2 = self._ui.doubleSpinBox_x1_m_1.value()
+        Y2 = self._ui.doubleSpinBox_y1_m_1.value()
+        X3 = self._ui.doubleSpinBox_x2_m_1.value()
+        Y3 = self._ui.doubleSpinBox_y2_m_1.value()
 
-        # параметры погрешностей
-        sigma_r_allow = self.ui.doubleSpinBox_sigma_d_m_1.value()
-        sigma_t = self.ui.doubleSpinBox_sigma_r_m_1.value()
+        sigma_r_allow = self._ui.doubleSpinBox_sigma_d_m_1.value()
+        sigma_t = self._ui.doubleSpinBox_sigma_r_m_1.value()
 
-        # параметры разбиения 
-        P = self.ui.spinBox_p_m_1.value()
-        r = self.ui.doubleSpinBox_r_m_1.value()
+        P = self._ui.spinBox_p_m_1.value()
+        r = self._ui.doubleSpinBox_r_m_1.value()
 
         # расчет
         graph_data = calculate_method_1(X2, Y2, X3, Y3,
@@ -140,17 +141,17 @@ class MainWindow(QMainWindow):
         # отключение активных элементов
         self._active_elems_enabled(False)
 
-        # координаты
-        A1, A2 = self.ui.doubleSpinBox_x1_m_2.value(), self.ui.doubleSpinBox_y1_m_2.value()
-        B1, B2 = self.ui.doubleSpinBox_x2_m_2.value(), self.ui.doubleSpinBox_y2_m_2.value()
+        # параметры построения графика
+        A1 = self._ui.doubleSpinBox_x1_m_2.value()
+        A2 = self._ui.doubleSpinBox_y1_m_2.value()
+        B1 = self._ui.doubleSpinBox_x2_m_2.value()
+        B2 = self._ui.doubleSpinBox_y2_m_2.value()
 
-        # параметры погрешностей
-        sigma_d = self.ui.doubleSpinBox_sigma_d_m_2.value()
-        sigma_r = self.ui.doubleSpinBox_sigma_r_m_2.value()
+        sigma_d = self._ui.doubleSpinBox_sigma_d_m_2.value()
+        sigma_r = self._ui.doubleSpinBox_sigma_r_m_2.value()
 
-        # параметры разбиения 
-        P = self.ui.spinBox_p_m_2.value()
-        r = self.ui.doubleSpinBox_r_m_2.value()
+        P = self._ui.spinBox_p_m_2.value()
+        r = self._ui.doubleSpinBox_r_m_2.value()
 
         # расчет
         graph_data = calculate_method_2(A1, A2, B1, B2,
@@ -169,17 +170,17 @@ class MainWindow(QMainWindow):
         # отключение активных элементов
         self._active_elems_enabled(False)
 
-        # координаты
-        A1, A2 = self.ui.doubleSpinBox_x1_m_3.value(), self.ui.doubleSpinBox_y1_m_3.value()
-        B1, B2 = self.ui.doubleSpinBox_x2_m_3.value(), self.ui.doubleSpinBox_y2_m_3.value()
+        # параметры построения графика
+        A1 = self._ui.doubleSpinBox_x1_m_3.value()
+        A2 = self._ui.doubleSpinBox_y1_m_3.value()
+        B1 = self._ui.doubleSpinBox_x2_m_3.value()
+        B2 = self._ui.doubleSpinBox_y2_m_3.value()
 
-        # параметры погрешностей
-        sigma_d = self.ui.doubleSpinBox_sigma_d_m_3.value()
-        sigma_theta = self.ui.doubleSpinBox_sigma_r_m_3.value()
+        sigma_d = self._ui.doubleSpinBox_sigma_d_m_3.value()
+        sigma_theta = self._ui.doubleSpinBox_sigma_r_m_3.value()
 
-        # параметры разбиения 
-        P = self.ui.spinBox_p_m_3.value()
-        r = self.ui.doubleSpinBox_r_m_3.value()
+        P = self._ui.spinBox_p_m_3.value()
+        r = self._ui.doubleSpinBox_r_m_3.value()
 
         # расчет
         graph_data = calculate_method_3(A1, A2, B1, B2,
