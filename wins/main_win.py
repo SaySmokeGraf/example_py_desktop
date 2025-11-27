@@ -33,30 +33,30 @@ class MainWindow(QMainWindow):
         self._setup_additional_ui()
 
         # сигналы
-        self._ui.btn_plot_m_1.clicked.connect(self._calculate_method_1)
-        self._ui.btn_plot_m_2.clicked.connect(self._calculate_method_2)
-        self._ui.btn_plot_m_3.clicked.connect(self._calculate_method_3)
-        self._ui.checkBox_legend_m_1.stateChanged.connect(lambda: self._upd_legend(0))
-        self._ui.checkBox_legend_m_2.stateChanged.connect(lambda: self._upd_legend(1))
-        self._ui.checkBox_legend_m_3.stateChanged.connect(lambda: self._upd_legend(2))
+        self._ui.btn_plot_m1.clicked.connect(self._calculate_method_1)
+        self._ui.btn_plot_m2.clicked.connect(self._calculate_method_2)
+        self._ui.btn_plot_m3.clicked.connect(self._calculate_method_3)
+        self._ui.check_legend_m1.stateChanged.connect(lambda: self._upd_legend(0))
+        self._ui.check_legend_m2.stateChanged.connect(lambda: self._upd_legend(1))
+        self._ui.check_legend_m3.stateChanged.connect(lambda: self._upd_legend(2))
     
     def _setup_additional_ui(self) -> None:
         """Развернуть дополнительный ГПИ."""
         # подготавливаем временные кортежи и списки для расположения графиков
-        self._temp_frames_graph = (self._ui.frame_graph_m_1,
-                                   self._ui.frame_graph_m_2,
-                                   self._ui.frame_graph_m_3)
-        self._temp_lbls_to_morph = [self._ui.lbl_to_morph_into_graph_m_1,
-                                    self._ui.lbl_to_morph_into_graph_m_2,
-                                    self._ui.lbl_to_morph_into_graph_m_3]
-        self._temp_h_layouts = (self._ui.horizontalLayout_9,
-                                self._ui.horizontalLayout_10,
-                                self._ui.horizontalLayout_14)
+        self._temp_frames_graph = (self._ui.frame_graph_m1,
+                                   self._ui.frame_graph_m2,
+                                   self._ui.frame_graph_m3)
+        self._temp_lbls_to_morph = [self._ui.lbl_to_morph_m1,
+                                    self._ui.lbl_to_morph_m2,
+                                    self._ui.lbl_to_morph_m3]
+        self._temp_h_layouts = (self._ui.hlayout_graph_m1,
+                                self._ui.hlayout_graph_m2,
+                                self._ui.hlayout_graph_m3)
 
         # подготавливаем список чекбоксов вкл/выкл легенд
-        self._checkboxes_leg = (self._ui.checkBox_legend_m_1,
-                                self._ui.checkBox_legend_m_2,
-                                self._ui.checkBox_legend_m_3)
+        self._checkboxes_leg = (self._ui.check_legend_m1,
+                                self._ui.check_legend_m2,
+                                self._ui.check_legend_m3)
         
         # разворачиваем графики
         self._setup_graphs()
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
         :param enabled: флаг включенности
         :type enabled: bool
         """
-        self._ui.tabWidget.setEnabled(enabled)
+        self._ui.tabs_methods.setEnabled(enabled)
     
     def _upd_legend(self, n: int) -> None:
         """Обновить состояние легенды на графике.
@@ -113,16 +113,16 @@ class MainWindow(QMainWindow):
         self._active_elems_enabled(False)
 
         # параметры построения графика
-        X2 = self._ui.doubleSpinBox_x1_m_1.value()
-        Y2 = self._ui.doubleSpinBox_y1_m_1.value()
-        X3 = self._ui.doubleSpinBox_x2_m_1.value()
-        Y3 = self._ui.doubleSpinBox_y2_m_1.value()
+        X2 = self._ui.dspinbox_x1_m1.value()
+        Y2 = self._ui.dspinbox_y1_m1.value()
+        X3 = self._ui.dspinbox_x2_m1.value()
+        Y3 = self._ui.dspinbox_y2_m1.value()
 
-        sigma_r_allow = self._ui.doubleSpinBox_sigma_d_m_1.value()
-        sigma_t = self._ui.doubleSpinBox_sigma_r_m_1.value()
+        sigma_r_allow = self._ui.dspinbox_sigma_d_m1.value()
+        sigma_t = self._ui.dspinbox_sigma_r_m1.value()
 
-        P = self._ui.spinBox_p_m_1.value()
-        r = self._ui.doubleSpinBox_r_m_1.value()
+        P = self._ui.spinbox_p_m1.value()
+        r = self._ui.dspinbox_r_m1.value()
 
         # расчет
         graph_data = calculate_method_1(X2, Y2, X3, Y3,
@@ -142,16 +142,16 @@ class MainWindow(QMainWindow):
         self._active_elems_enabled(False)
 
         # параметры построения графика
-        A1 = self._ui.doubleSpinBox_x1_m_2.value()
-        A2 = self._ui.doubleSpinBox_y1_m_2.value()
-        B1 = self._ui.doubleSpinBox_x2_m_2.value()
-        B2 = self._ui.doubleSpinBox_y2_m_2.value()
+        A1 = self._ui.dspinbox_x1_m2.value()
+        A2 = self._ui.dspinbox_y1_m2.value()
+        B1 = self._ui.dspinbox_x2_m2.value()
+        B2 = self._ui.dspinbox_y2_m2.value()
 
-        sigma_d = self._ui.doubleSpinBox_sigma_d_m_2.value()
-        sigma_r = self._ui.doubleSpinBox_sigma_r_m_2.value()
+        sigma_d = self._ui.dspinbox_sigma_d_m2.value()
+        sigma_r = self._ui.dspinbox_sigma_r_m2.value()
 
-        P = self._ui.spinBox_p_m_2.value()
-        r = self._ui.doubleSpinBox_r_m_2.value()
+        P = self._ui.spinbox_p_m2.value()
+        r = self._ui.dspinbox_r_m2.value()
 
         # расчет
         graph_data = calculate_method_2(A1, A2, B1, B2,
@@ -171,16 +171,16 @@ class MainWindow(QMainWindow):
         self._active_elems_enabled(False)
 
         # параметры построения графика
-        A1 = self._ui.doubleSpinBox_x1_m_3.value()
-        A2 = self._ui.doubleSpinBox_y1_m_3.value()
-        B1 = self._ui.doubleSpinBox_x2_m_3.value()
-        B2 = self._ui.doubleSpinBox_y2_m_3.value()
+        A1 = self._ui.dspinbox_x1_m3.value()
+        A2 = self._ui.dspinbox_y1_m3.value()
+        B1 = self._ui.dspinbox_x2_m3.value()
+        B2 = self._ui.dspinbox_y2_m3.value()
 
-        sigma_d = self._ui.doubleSpinBox_sigma_d_m_3.value()
-        sigma_theta = self._ui.doubleSpinBox_sigma_r_m_3.value()
+        sigma_d = self._ui.dspinbox_sigma_d_m3.value()
+        sigma_theta = self._ui.dspinbox_sigma_r_m3.value()
 
-        P = self._ui.spinBox_p_m_3.value()
-        r = self._ui.doubleSpinBox_r_m_3.value()
+        P = self._ui.spinbox_p_m3.value()
+        r = self._ui.dspinbox_r_m3.value()
 
         # расчет
         graph_data = calculate_method_3(A1, A2, B1, B2,
