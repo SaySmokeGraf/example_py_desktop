@@ -84,15 +84,6 @@ class GraphManager:
                 self._graph.scene().removeItem(self._graph_legend)
                 self._graph_legend = None
 
-    @property
-    def graph(self) -> pgraph.PlotWidget:
-        """Виджет графика.
-
-        :return: виджет графика
-        :rtype: PlotWidget
-        """
-        return self._graph
-
 
 if __name__ == "__main__":
     print(__doc__)
