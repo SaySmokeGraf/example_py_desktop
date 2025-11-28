@@ -1,5 +1,7 @@
 """Модуль главного окна."""
 
+from collections import namedtuple
+
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow
 import pyqtgraph as pgraph
@@ -39,17 +41,25 @@ class MainWindow(QMainWindow):
         self._ui.check_legend_m3.stateChanged.connect(self._df_manager_m3.enable_legend)
     
     def _setup_graphs(self) -> list[GraphManager]:
-        """Разворачивает все графики для методов."""
-        # подготавливаем временные кортежи и списки для расположения графиков
-        self._temp_frames_graph = (self._ui.frame_graph_m1,
-                                   self._ui.frame_graph_m2,
-                                   self._ui.frame_graph_m3)
-        self._temp_lbls_to_morph = [self._ui.lbl_to_morph_m1,
-                                    self._ui.lbl_to_morph_m2,
-                                    self._ui.lbl_to_morph_m3]
-        self._temp_h_layouts = (self._ui.hlayout_graph_m1,
-                                self._ui.hlayout_graph_m2,
-                                self._ui.hlayout_graph_m3)
+        """Разворачивает все графики для методов.
+
+        :return: список менеджеров графиков
+        :rtype: list[GraphManager]
+        """
+        # подготавливаем именованные кортежи для замены лейблов, созданных для
+        # этой цели, на графики
+        MorphObject = namedtuple('MorphObject', ['frame', 'lbl', 'layout'])
+        morph = (
+            MorphObject(frame=self._ui.frame_graph_m1,
+                        lbl=self._ui.lbl_to_morph_m1,
+                        layout=self._ui.hlayout_graph_m1),
+            MorphObject(frame=self._ui.frame_graph_m2,
+                        lbl=self._ui.lbl_to_morph_m2,
+                        layout=self._ui.hlayout_graph_m2),
+            MorphObject(frame=self._ui.frame_graph_m3,
+                        lbl=self._ui.lbl_to_morph_m3,
+                        layout=self._ui.hlayout_graph_m3)
+        )
         
         # цвета графиков
         pgraph.setConfigOption('background', 'w')
@@ -60,19 +70,13 @@ class MainWindow(QMainWindow):
 
         # пробежка по 3 методам с заменой лейблов, созданных для этой цели, на
         # графики с дальнейшей их разверткой и менеджерами графиков
-        for i in range(3):
-            self._temp_h_layouts[i].removeWidget(self._temp_lbls_to_morph[i])
-            self._temp_lbls_to_morph[i].deleteLater()
-            self._temp_lbls_to_morph[i] = None
+        for item in morph:
+            item.layout.removeWidget(item.lbl)
+            item.lbl.deleteLater()
             
-            new_graph = pgraph.PlotWidget(self._temp_frames_graph[i])
-            self._temp_h_layouts[i].addWidget(new_graph)
+            new_graph = pgraph.PlotWidget(item.frame)
+            item.layout.addWidget(new_graph)
             graph_managers.append(GraphManager(new_graph))
-        
-        # удаляем временные списки и кортежи
-        del self._temp_frames_graph
-        del self._temp_h_layouts
-        del self._temp_lbls_to_morph
 
         # возвращаем список менеджеров графиков
         return graph_managers
