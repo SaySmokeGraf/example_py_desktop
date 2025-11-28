@@ -1,6 +1,33 @@
 """Модуль с менеджером графика."""
 
+from dataclasses import dataclass
+
 import pyqtgraph as pgraph
+
+
+@dataclass(eq=False)
+class GraphDataFrame:
+    """Класс кадра данных на графике.
+    
+    :param X: список координат X подходящих точек
+    :type X: list[float]
+    :param Y: список координат Y подходящих точек
+    :type Y: list[float]
+    :param Xout: список координат X контура подходящих точек
+    :type Xout: list[float]
+    :param Yout: список координат Y контура подходящих точек
+    :type Yout: list[float]
+    :param Xst: список координат X маяков
+    :type Xst: list[float]
+    :param Yst: список координат Y маяков
+    :type Yst: list[float] 
+    """
+    X: list[float]
+    Y: list[float]
+    Xout: list[float]
+    Yout: list[float]
+    Xst: list[float]
+    Yst: list[float]
 
 
 class GraphManager:
@@ -39,27 +66,15 @@ class GraphManager:
         self._graph_legend = None
         self.enable_legend()
 
-    def update(self, X: list[float], Y: list[float],
-                     Xout: list[float], Yout: list[float],
-                     Xm: list[float], Ym: list[float]) -> None:
+    def update(self, dataframe: GraphDataFrame) -> None:
         """Обновляет данные на графике.
 
-        :param X: список координат X подходящих точек
-        :type X: list[float]
-        :param Y: список координат Y подходящих точек
-        :type Y: list[float]
-        :param Xout: список координат X контура подходящих точек
-        :type Xout: list[float]
-        :param Yout: список координат Y контура подходящих точек
-        :type Yout: list[float]
-        :param Xm: список координат X маяков
-        :type Xm: list[float]
-        :param Ym: список координат Y маяков
-        :type Ym: list[float]
+        :param dataframe: кадр данных для графика
+        :type dataframe: GraphDataFrame
         """
-        self._plot_data.setData(X, Y)
-        self._plot_outline.setData(Xout, Yout)
-        self._plot_stations.setData(Xm, Ym)
+        self._plot_data.setData(dataframe.X, dataframe.Y)
+        self._plot_outline.setData(dataframe.Xout, dataframe.Yout)
+        self._plot_stations.setData(dataframe.Xst, dataframe.Yst)
 
     def enable_legend(self, enabled: bool = True) -> None:
         """Включить/выключить легенду на графике.

@@ -4,7 +4,7 @@ from typing import Callable, Iterable
 
 from PyQt5.QtWidgets import QCheckBox, QDoubleSpinBox, QSpinBox
 
-from utils.graph_manager import GraphManager
+from utils.graph_manager import GraphDataFrame, GraphManager
 
 
 class DataFlowManager:
@@ -37,14 +37,14 @@ class DataFlowManager:
         self._calc_function = calc_function
         self._legend_checkbox = legend_checkbox
     
-    def _calculate(self, data: Iterable[float | int]) -> list[list[float]]:
+    def _calculate(self, data: Iterable[float | int]) -> GraphDataFrame:
         """Рассчитать данные для графика по методу.
 
         :param data: данные для подсчета
         :type data: Iterable[float | int]
 
         :return: рассчитанные данные
-        :rtype: list[list[float]]
+        :rtype: GraphDataFrame
         """
         return self._calc_function(*data)
     
@@ -58,8 +58,8 @@ class DataFlowManager:
     
     def plot_method(self) -> None:
         """Построить график по методу."""
-        graph_data = self._calculate(self._get_data())
-        self._graph_manager.update(*graph_data)
+        dataframe = self._calculate(self._get_data())
+        self._graph_manager.update(dataframe)
     
     def enable_legend(self) -> None:
         """Включить/выключить легенду."""

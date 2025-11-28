@@ -2,6 +2,8 @@
 
 import math
 
+from utils.graph_manager import GraphDataFrame
+
 
 def vector_magnitude(v: list[float, float]) -> float:
     """Расчет модуля двумерного вектора
@@ -44,7 +46,7 @@ def dot_to_mag_prod(v1: list[float, float], v2: list[float, float]) -> float:
 
 def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
                        sigma_r_allow: float, sigma_t: float, P: int,
-                       r: float) -> list[list[float]]:
+                       r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по первому методу (разностно-дальномерный).
     
     Для обозначения отдельных величин используется математические обозначения в
@@ -70,11 +72,8 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
     sigma_ratio = sigma_r_allow / sigma_t if sigma_t else float('inf')
@@ -137,7 +136,7 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
             flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
         [0, X2, X3], [0, Y2, Y3]
@@ -146,7 +145,7 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
 
 def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
                        sigma_d: float, sigma_r: float, P: int,
-                       r: float) -> list[list[float]]:
+                       r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по второму методу (дальномерный).
 
     Для обозначения отдельных величин используется математические обозначения в
@@ -169,11 +168,8 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
     A = [A1, A2]
@@ -230,7 +226,7 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
             flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
         [A1, B1], [A2, B2]
@@ -239,7 +235,7 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
 
 def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
                        sigma_d: float, sigma_theta: float, P: int,
-                       r: float) -> list[list[float]]:
+                       r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по третьему методу (угломерный).
 
     Для обозначения отдельных величин используется математические обозначения в
@@ -262,11 +258,8 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
     A = [A1, A2]
@@ -274,7 +267,7 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
 
     d_AB = math.sqrt((A1 - B1)**2 + (A2 - B2)**2)  # расстояние между A и B
     if not d_AB:
-        return_data = (
+        return_data = GraphDataFrame(
             [], [], [], [],
             [A1, B1], [A2, B2]
         )
@@ -337,7 +330,7 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
                 flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
         [A1, B1], [A2, B2]
