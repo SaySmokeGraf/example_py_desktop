@@ -2,6 +2,8 @@
 
 import math
 
+from utils.graph_manager import GraphDataFrame
+
 
 def vector_magnitude(v: list[float, float]) -> float:
     """Расчет модуля двумерного вектора
@@ -42,42 +44,40 @@ def dot_to_mag_prod(v1: list[float, float], v2: list[float, float]) -> float:
     mag_prod = vector_magnitude(v1) * vector_magnitude(v2)
     return dot_prod / mag_prod if mag_prod else 0
 
-def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
-                       sigma_r_allow: float, sigma_t: float, P: int,
-                       r: float) -> list[list[float]]:
+def calculate_method_1(X1: float, Y1: float, X2: float, Y2: float,
+                       sigma_d: float, sigma_r: float,
+                       P: int, r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по первому методу (разностно-дальномерный).
     
     Для обозначения отдельных величин используется математические обозначения в
     соответствии с методом расчета рабочих зон.
 
-    В данном методе используется 3 маяка, первый из которых считается
-    расположенным в начале координат.
+    В данном методе используется 3 маяка, один из которых считается
+    расположенным в начале координат. Таковой обозначим индексом 0 (X0, Y0 и
+    т.д.) для сохранения единости обозначений.
 
+    :param X1: координата X первого маяка
+    :type X1: float
+    :param Y1: координата Y первого маяка
+    :type Y1: float
     :param X2: координата X второго маяка
     :type X2: float
     :param Y2: координата Y второго маяка
     :type Y2: float
-    :param X3: координата X третьего маяка
-    :type X3: float
-    :param Y3: координата Y третьего маяка
-    :type Y3: float
-    :param sigma_r_allow: допустимая радиальная ошибка
-    :type sigma_r_allow: float
-    :param sigma_t: значение радиальной ошибки
-    :type sigma_t: float
+    :param sigma_d: допустимая радиальная ошибка
+    :type sigma_d: float
+    :param sigma_r: значение радиальной ошибки
+    :type sigma_r: float
     :param P: число отсчетов
     :type P: int
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
-    sigma_ratio = sigma_r_allow / sigma_t if sigma_t else float('inf')
+    sigma_ratio = sigma_d / sigma_r if sigma_r else float('inf')
 
     # рассчитываемые данные
     coord_x = []
@@ -93,20 +93,19 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
 
         # пробежка в конкретном углу от начала координат
         for i in range(1, int(P) + 1):
-            mx = math.sin(angle) * (i * r)
-            my = math.cos(angle) * (i * r)
+            Xm, Ym = math.sin(angle) * (i * r), math.cos(angle) * (i * r)
             
             # получение векторов
-            m0 = [0 - mx, 0 - my]
-            v1 = [X2 - mx, Y2 - my]
-            v2 = [X3 - mx, Y3 - my]
+            v0 = [0 - Xm, 0 - Ym]
+            v1 = [X1 - Xm, Y1 - Ym]
+            v2 = [X2 - Xm, Y2 - Ym]
             
             # расчет коэффициента
-            dot_m0_v1 = dot_to_mag_prod(m0, v1)
-            dot_m0_v2 = dot_to_mag_prod(m0, v2)
+            dot_v0_v1 = dot_to_mag_prod(v0, v1)
+            dot_v0_v2 = dot_to_mag_prod(v0, v2)
             
-            psi1 = math.acos(max(-1, min(1, dot_m0_v1)))
-            psi2 = math.acos(max(-1, min(1, dot_m0_v2)))
+            psi1 = math.acos(max(-1, min(1, dot_v0_v1)))
+            psi2 = math.acos(max(-1, min(1, dot_v0_v2)))
             
             u_coef = math.sqrt(math.sin(psi1 / 2)**2 + math.sin(psi2 / 2)**2)
             d_coef = 2 * math.sin((psi1 + psi2) / 2) * math.sin(psi1 / 2) * math.sin(psi2 / 2)
@@ -119,11 +118,11 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
             # добавление таковой в соответствующий список
             if Kr < sigma_ratio:
                 if flag_not_first_iter and not flag_in_good_area:
-                    coord_outline_x.append(mx)
-                    coord_outline_y.append(my)
+                    coord_outline_x.append(Xm)
+                    coord_outline_y.append(Ym)
                 else:
-                    coord_x.append(mx)
-                    coord_y.append(my)
+                    coord_x.append(Xm)
+                    coord_y.append(Ym)
                 flag_in_good_area = True
 
             else:
@@ -137,29 +136,29 @@ def calculate_method_1(X2: float, Y2: float, X3: float, Y3: float,
             flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
-        [0, X2, X3], [0, Y2, Y3]
+        [0, X1, X2], [0, Y1, Y2]
     )
     return return_data
 
-def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
-                       sigma_d: float, sigma_r: float, P: int,
-                       r: float) -> list[list[float]]:
+def calculate_method_2(X1: float, Y1: float, X2: float, Y2: float,
+                       sigma_d: float, sigma_r: float,
+                       P: int, r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по второму методу (дальномерный).
 
     Для обозначения отдельных величин используется математические обозначения в
     соответствии с методом расчета рабочих зон.
 
-    :param A1: координата X первого маяка
-    :type A1: float
-    :param A2: координата Y первого маяка
-    :type A2: float
-    :param B1: координата X второго маяка
-    :type B1: float
-    :param B2: координата Y второго маяка
-    :type B2: float
+    :param X1: координата X первого маяка
+    :type X1: float
+    :param Y1: координата Y первого маяка
+    :type Y1: float
+    :param X2: координата X второго маяка
+    :type X2: float
+    :param Y2: координата Y второго маяка
+    :type Y2: float
     :param sigma_d: допустимая радиальная ошибка
     :type sigma_d: float
     :param sigma_r: значение радиальной ошибки
@@ -169,15 +168,10 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
-    A = [A1, A2]
-    B = [B1, B2]
     sina = math.sqrt(2) * sigma_r / sigma_d if sigma_d else float('inf')
 
     # рассчитываемые данные
@@ -194,14 +188,14 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
 
         # пробежка в конкретном углу от начала координат
         for i in range(1, int(P) + 1):
-            M = [math.cos(angle) * (i * r), math.sin(angle) * (i * r)]
+            Xm, Ym = math.cos(angle) * (i * r), math.sin(angle) * (i * r)
 
             # векторы
-            MB = [B[0] - M[0], B[1] - M[1]]
-            MA = [A[0] - M[0], A[1] - M[1]]
+            v1 = [X1 - Xm, Y1 - Ym]
+            v2 = [X2 - Xm, Y2 - Ym]
             
             # расчет косинуса и синуса
-            COS_alpha = dot_to_mag_prod(MA, MB)
+            COS_alpha = dot_to_mag_prod(v1, v2)
             if COS_alpha > 1:
                 COS_alpha = 1
             elif COS_alpha < -1:
@@ -212,11 +206,11 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
             # добавление таковой в соответствующий список
             if SIN_alpha >= sina:
                 if flag_not_first_iter and not flag_in_good_area:
-                    coord_outline_x.append(M[0])
-                    coord_outline_y.append(M[1])
+                    coord_outline_x.append(Xm)
+                    coord_outline_y.append(Ym)
                 else:
-                    coord_x.append(M[0])
-                    coord_y.append(M[1])
+                    coord_x.append(Xm)
+                    coord_y.append(Ym)
                 flag_in_good_area = True
 
             else:
@@ -230,57 +224,51 @@ def calculate_method_2(A1: float, A2: float, B1: float, B2: float,
             flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
-        [A1, B1], [A2, B2]
+        [X1, X2], [Y1, Y2]
     )
     return return_data
 
-def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
-                       sigma_d: float, sigma_theta: float, P: int,
-                       r: float) -> list[list[float]]:
+def calculate_method_3(X1: float, Y1: float, X2: float, Y2: float,
+                       sigma_d: float, sigma_r: float,
+                       P: int, r: float) -> GraphDataFrame:
     """Расчет рабочей зоны по третьему методу (угломерный).
 
     Для обозначения отдельных величин используется математические обозначения в
     соответствии с методом расчета рабочих зон.
 
-    :param A1: координата X первого маяка
-    :type A1: float
-    :param A2: координата Y первого маяка
-    :type A2: float
-    :param B1: координата X второго маяка
-    :type B1: float
-    :param B2: координата Y второго маяка
-    :type B2: float
+    :param X1: координата X первого маяка
+    :type X1: float
+    :param Y1: координата Y первого маяка
+    :type Y1: float
+    :param X2: координата X второго маяка
+    :type X2: float
+    :param Y2: координата Y второго маяка
+    :type Y2: float
     :param sigma_d: допустимая угловая ошибка
     :type sigma_d: float
-    :param sigma_theta: значение угловой ошибки
-    :type sigma_theta: float
+    :param sigma_r: значение угловой ошибки
+    :type sigma_r: float
     :param P: число отсчетов
     :type P: int
     :param r: величина шага
     :type r: float
 
-    :return: набор полученных по расчетам данных. Имеет 6 подсписков:
-        X-координаты подходящей области, Y-координаты подходящей области,
-        X-координаты контура подходящей области, Y-координаты контура
-        подходящей области, X-координаты маяков, Y-координаты маяков
-    :rtype: list[list[float]]
+    :return: кадр данных для графика
+    :rtype: GraphDataFrame
     """
     # вспомогательные данные
-    A = [A1, A2]
-    B = [B1, B2]
-
-    d_AB = math.sqrt((A1 - B1)**2 + (A2 - B2)**2)  # расстояние между A и B
+    d_AB = math.sqrt((X1 - X2)**2 + (Y1 - Y2)**2)  # расстояние между маяками
     if not d_AB:
-        return_data = (
+        return_data = GraphDataFrame(
             [], [], [], [],
-            [A1, B1], [A2, B2]
+            [X1, X2], [Y1, Y2]
         )
         return return_data
 
-    sigma_ratio = sigma_d / (d_AB * sigma_theta) if sigma_theta else float('inf')
+    sigma_ratio = sigma_d / (d_AB * sigma_r) if sigma_r else float('inf')
 
     # рассчитываемые данные
     coord_x = []
@@ -296,14 +284,14 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
 
         # пробежка в конкретном углу от начала координат
         for i in range(1, int(P) + 1):
-            M = [math.cos(angle) * (i * r), math.sin(angle) * (i * r)]
+            Xm, Ym = math.cos(angle) * (i * r), math.sin(angle) * (i * r)
 
             # векторы
-            MB = [B[0] - M[0], B[1] - M[1]]
-            MA = [A[0] - M[0], A[1] - M[1]]
+            v1 = [X1 - Xm, Y1 - Ym]
+            v2 = [X2 - Xm, Y2 - Ym]
             
             # расчет косинуса и синуса
-            COS_alpha = dot_to_mag_prod(MA, MB)
+            COS_alpha = dot_to_mag_prod(v1, v2)
             if COS_alpha > 1:
                 COS_alpha = 1
             elif COS_alpha < -1:
@@ -311,19 +299,19 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
             SIN_alpha = math.sqrt(1 - COS_alpha**2)
             
             if SIN_alpha:
-                rA = vector_magnitude(MA)
-                rB = vector_magnitude(MB)
-                Kr = 0.017 / SIN_alpha * math.sqrt((rA / d_AB)**2 + (rB / d_AB)**2)
+                r1 = vector_magnitude(v1)
+                r2 = vector_magnitude(v2)
+                Kr = 0.017 / SIN_alpha * math.sqrt((r1 / d_AB)**2 + (r2 / d_AB)**2)
 
                 # условие "подходящести" точки, проверка на краевые точки и
                 # добавление таковой в соответствующий список
                 if Kr <= sigma_ratio:
                     if flag_not_first_iter and not flag_in_good_area:
-                        coord_outline_x.append(M[0])
-                        coord_outline_y.append(M[1])
+                        coord_outline_x.append(Xm)
+                        coord_outline_y.append(Ym)
                     else:
-                        coord_x.append(M[0])
-                        coord_y.append(M[1])
+                        coord_x.append(Xm)
+                        coord_y.append(Ym)
                     flag_in_good_area = True
 
                 else:
@@ -337,12 +325,13 @@ def calculate_method_3(A1: float, A2: float, B1: float, B2: float,
                 flag_not_first_iter = True
     
     # сборка и возврат данных
-    return_data = (
+    return_data = GraphDataFrame(
         coord_x, coord_y,
         coord_outline_x, coord_outline_y,
-        [A1, B1], [A2, B2]
+        [X1, X2], [Y1, Y2]
     )
     return return_data
+
 
 if __name__ == "__main__":
     print(__doc__)
