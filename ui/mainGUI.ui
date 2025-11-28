@@ -38,9 +38,9 @@
    <string>Рабочие зоны</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="vlayout_central">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="tabs_methods">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -64,24 +64,24 @@
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
       </property>
-      <widget class="QWidget" name="page_method_1">
+      <widget class="QWidget" name="tab_m1">
        <attribute name="title">
         <string>Разностно-дальномерный</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="hlayout_tab_m1">
         <item>
-         <layout class="QHBoxLayout" name="h_layout_main_m_1" stretch="10,5">
+         <layout class="QHBoxLayout" name="hlayout_main_m1" stretch="10,5">
           <item>
-           <widget class="QFrame" name="frame_graph_m_1">
+           <widget class="QFrame" name="frame_graph_m1">
             <property name="frameShape">
              <enum>QFrame::Box</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <layout class="QHBoxLayout" name="hlayout_graph_m1">
              <item>
-              <widget class="QLabel" name="lbl_to_morph_into_graph_m_1">
+              <widget class="QLabel" name="lbl_to_morph_m1">
                <property name="text">
                 <string>TextLabel</string>
                </property>
@@ -91,18 +91,18 @@
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="v_layout_active_m_1" stretch="20,2,3">
+           <layout class="QVBoxLayout" name="vlayout_active_m1" stretch="20,2,3">
             <item>
-             <widget class="QFrame" name="frame_parameters_m_1">
+             <widget class="QFrame" name="frame_params_m1">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_3">
+              <layout class="QVBoxLayout" name="vlayout_params_m1">
                <item>
-                <widget class="QGroupBox" name="groupBox_coords_m_1">
+                <widget class="QGroupBox" name="groupbox_coords_m1">
                  <property name="baseSize">
                   <size>
                    <width>0</width>
@@ -124,14 +124,14 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_coords_m1">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_coords_m_1" columnstretch="1,2">
+                   <layout class="QGridLayout" name="glayout_coords_m1" columnstretch="1,2">
                     <property name="sizeConstraint">
                      <enum>QLayout::SetDefaultConstraint</enum>
                     </property>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y1_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y1_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -161,7 +161,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x1_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x1_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -188,7 +188,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_x1_m_1">
+                     <widget class="QLabel" name="lbl_x1_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -203,7 +203,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_x2_m_1">
+                     <widget class="QLabel" name="lbl_x2_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -218,7 +218,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_y1_m_1">
+                     <widget class="QLabel" name="lbl_y1_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -233,7 +233,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_y2_m_1">
+                     <widget class="QLabel" name="lbl_y2_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -248,7 +248,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x2_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x2_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -275,7 +275,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y2_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y2_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -307,7 +307,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="groupBox_partition_parameters_m_1">
+                <widget class="QGroupBox" name="groupbox_partition_m1">
                  <property name="font">
                   <font>
                    <pointsize>13</pointsize>
@@ -323,11 +323,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_partition_m1">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_params_m_1" columnstretch="5,3">
+                   <layout class="QGridLayout" name="glayout_partition_m1" columnstretch="5,3">
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_sigma_d_m_1">
+                     <widget class="QLabel" name="lbl_sigma_d_m1">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -354,7 +354,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_p_m_1">
+                     <widget class="QLabel" name="lbl_p_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -369,7 +369,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_r_m_1">
+                     <widget class="QLabel" name="lbl_r_m1">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -384,7 +384,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_sigma_r_m_1">
+                     <widget class="QLabel" name="lbl_sigma_r_m1">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -402,7 +402,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_d_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_d_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -429,7 +429,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_r_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_r_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -456,7 +456,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QSpinBox" name="spinBox_p_m_1">
+                     <widget class="QSpinBox" name="spinbox_p_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -480,7 +480,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_r_m_1">
+                     <widget class="QDoubleSpinBox" name="dspinbox_r_m1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -515,16 +515,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_legend_m_1">
+             <widget class="QFrame" name="frame_legend_m1">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <layout class="QHBoxLayout" name="hlayout_legend_m1">
                <item>
-                <widget class="QCheckBox" name="checkBox_legend_m_1">
+                <widget class="QCheckBox" name="check_legend_m1">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -554,16 +554,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_buttons_m_1">
+             <widget class="QFrame" name="frame_buttons_m1">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <layout class="QHBoxLayout" name="hlayout_buttons_m1">
                <item>
-                <widget class="QPushButton" name="btn_plot_m_1">
+                <widget class="QPushButton" name="btn_plot_m1">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -584,24 +584,24 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_method_2">
+      <widget class="QWidget" name="tab_m2">
        <attribute name="title">
         <string>Дальномерный</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="hlayout_tab_m2">
         <item>
-         <layout class="QHBoxLayout" name="h_layout_main_m_2" stretch="10,5">
+         <layout class="QHBoxLayout" name="hlayout_main_m2" stretch="10,5">
           <item>
-           <widget class="QFrame" name="frame_graph_m_2">
+           <widget class="QFrame" name="frame_graph_m2">
             <property name="frameShape">
              <enum>QFrame::Box</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <layout class="QHBoxLayout" name="hlayout_graph_m2">
              <item>
-              <widget class="QLabel" name="lbl_to_morph_into_graph_m_2">
+              <widget class="QLabel" name="lbl_to_morph_m2">
                <property name="text">
                 <string>TextLabel</string>
                </property>
@@ -611,18 +611,18 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="v_layout_active_m_2" stretch="20,2,3">
+           <layout class="QVBoxLayout" name="vlayout_active_m2" stretch="20,2,3">
             <item>
-             <widget class="QFrame" name="frame_parameters_m_2">
+             <widget class="QFrame" name="frame_params_m2">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_4">
+              <layout class="QVBoxLayout" name="vlayout_params_m2">
                <item>
-                <widget class="QGroupBox" name="groupBox_coords_m_2">
+                <widget class="QGroupBox" name="groupbox_coords_m2">
                  <property name="baseSize">
                   <size>
                    <width>0</width>
@@ -644,14 +644,14 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_coords_m2">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_coords_m_2" columnstretch="1,2">
+                   <layout class="QGridLayout" name="glayout_coords_m2" columnstretch="1,2">
                     <property name="sizeConstraint">
                      <enum>QLayout::SetDefaultConstraint</enum>
                     </property>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y1_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y1_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -681,7 +681,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x1_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x1_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -708,7 +708,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_x1_m_2">
+                     <widget class="QLabel" name="lbl_x1_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -723,7 +723,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_x2_m_2">
+                     <widget class="QLabel" name="lbl_x2_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -738,7 +738,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_y1_m_2">
+                     <widget class="QLabel" name="lbl_y1_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -753,7 +753,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_y2_m_2">
+                     <widget class="QLabel" name="lbl_y2_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -768,7 +768,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x2_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x2_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -795,7 +795,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y2_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y2_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -827,7 +827,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="groupBox_partition_parameters_m_2">
+                <widget class="QGroupBox" name="groupbox_partition_m2">
                  <property name="font">
                   <font>
                    <pointsize>13</pointsize>
@@ -843,11 +843,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_12">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_partition_m2">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_params_m_2" columnstretch="5,3">
+                   <layout class="QGridLayout" name="glayout_partition_m2" columnstretch="5,3">
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_sigma_d_m_2">
+                     <widget class="QLabel" name="lbl_sigma_d_m2">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -865,7 +865,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_p_m_2">
+                     <widget class="QLabel" name="lbl_p_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -880,7 +880,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_r_m_2">
+                     <widget class="QLabel" name="lbl_r_m2">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -895,7 +895,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_sigma_r_m_2">
+                     <widget class="QLabel" name="lbl_sigma_r_m2">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -913,7 +913,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_d_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_d_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -940,7 +940,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_r_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_r_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -967,7 +967,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QSpinBox" name="spinBox_p_m_2">
+                     <widget class="QSpinBox" name="spinbox_p_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -991,7 +991,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_r_m_2">
+                     <widget class="QDoubleSpinBox" name="dspinbox_r_m2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1026,16 +1026,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_legend_m_2">
+             <widget class="QFrame" name="frame_legend_m2">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <layout class="QHBoxLayout" name="hlayout_legend_m2">
                <item>
-                <widget class="QCheckBox" name="checkBox_legend_m_2">
+                <widget class="QCheckBox" name="check_legend_m2">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -1065,16 +1065,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_buttons_m_2">
+             <widget class="QFrame" name="frame_buttons_m2">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <layout class="QHBoxLayout" name="hlayout_buttons_m2">
                <item>
-                <widget class="QPushButton" name="btn_plot_m_2">
+                <widget class="QPushButton" name="btn_plot_m2">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -1095,24 +1095,24 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_method_3">
+      <widget class="QWidget" name="tab_m3">
        <attribute name="title">
         <string>Угломерный</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="hlayout_tab_m3">
         <item>
-         <layout class="QHBoxLayout" name="h_layout_main_m_3" stretch="10,5">
+         <layout class="QHBoxLayout" name="hlayout_main_m3" stretch="10,5">
           <item>
-           <widget class="QFrame" name="frame_graph_m_3">
+           <widget class="QFrame" name="frame_graph_m3">
             <property name="frameShape">
              <enum>QFrame::Box</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <layout class="QHBoxLayout" name="hlayout_graph_m3">
              <item>
-              <widget class="QLabel" name="lbl_to_morph_into_graph_m_3">
+              <widget class="QLabel" name="lbl_to_morph_m3">
                <property name="text">
                 <string>TextLabel</string>
                </property>
@@ -1122,18 +1122,18 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="v_layout_active_m_3" stretch="20,2,3">
+           <layout class="QVBoxLayout" name="vlayout_active_m3" stretch="20,2,3">
             <item>
-             <widget class="QFrame" name="frame_parameters_m_3">
+             <widget class="QFrame" name="frame_params_m3">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
+              <layout class="QVBoxLayout" name="vlayout_params_m3">
                <item>
-                <widget class="QGroupBox" name="groupBox_coords_m_3">
+                <widget class="QGroupBox" name="groupbox_coords_m3">
                  <property name="baseSize">
                   <size>
                    <width>0</width>
@@ -1155,14 +1155,14 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_coords_m3">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_coords_m_3" columnstretch="1,2">
+                   <layout class="QGridLayout" name="glayout_coords_m3" columnstretch="1,2">
                     <property name="sizeConstraint">
                      <enum>QLayout::SetDefaultConstraint</enum>
                     </property>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y1_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y1_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1192,7 +1192,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x1_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x1_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1219,7 +1219,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_x1_m_3">
+                     <widget class="QLabel" name="lbl_x1_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1234,7 +1234,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_x2_m_3">
+                     <widget class="QLabel" name="lbl_x2_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1249,7 +1249,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_y1_m_3">
+                     <widget class="QLabel" name="lbl_y1_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1264,7 +1264,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_y2_m_3">
+                     <widget class="QLabel" name="lbl_y2_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1279,7 +1279,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_x2_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_x2_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1306,7 +1306,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_y2_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_y2_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1338,7 +1338,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="groupBox_partition_parameters_m_3">
+                <widget class="QGroupBox" name="groupbox_partition_m3">
                  <property name="font">
                   <font>
                    <pointsize>13</pointsize>
@@ -1354,11 +1354,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <layout class="QHBoxLayout" name="hlayout_groupbox_partition_m3">
                   <item>
-                   <layout class="QGridLayout" name="gridLayout_params_m_3" columnstretch="5,3">
+                   <layout class="QGridLayout" name="glayout_partition_m3" columnstretch="5,3">
                     <item row="0" column="0">
-                     <widget class="QLabel" name="label_sigma_d_m_3">
+                     <widget class="QLabel" name="lbl_sigma_d_m3">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -1376,7 +1376,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="0">
-                     <widget class="QLabel" name="label_p_m_3">
+                     <widget class="QLabel" name="lbl_p_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1391,7 +1391,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="QLabel" name="label_r_m_3">
+                     <widget class="QLabel" name="lbl_r_m3">
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
@@ -1406,7 +1406,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="0">
-                     <widget class="QLabel" name="label_sigma_r_m_3">
+                     <widget class="QLabel" name="lbl_sigma_r_m3">
                       <property name="font">
                        <font>
                         <pointsize>11</pointsize>
@@ -1424,7 +1424,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_d_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_d_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1451,7 +1451,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="1" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma_r_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_sigma_r_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1478,7 +1478,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="2" column="1">
-                     <widget class="QSpinBox" name="spinBox_p_m_3">
+                     <widget class="QSpinBox" name="spinbox_p_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1502,7 +1502,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="doubleSpinBox_r_m_3">
+                     <widget class="QDoubleSpinBox" name="dspinbox_r_m3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                         <horstretch>0</horstretch>
@@ -1537,16 +1537,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_legend_m_3">
+             <widget class="QFrame" name="frame_legend_m3">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_17">
+              <layout class="QHBoxLayout" name="hlayout_legend_m3">
                <item>
-                <widget class="QCheckBox" name="checkBox_legend_m_3">
+                <widget class="QCheckBox" name="check_legend_m3">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -1576,16 +1576,16 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="frame_buttons_m_3">
+             <widget class="QFrame" name="frame_buttons_m3">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_18">
+              <layout class="QHBoxLayout" name="hlayout_buttons_m3">
                <item>
-                <widget class="QPushButton" name="btn_plot_m_3">
+                <widget class="QPushButton" name="btn_plot_m3">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
