@@ -140,11 +140,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -170,11 +170,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -195,7 +195,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                        </font>
                       </property>
                       <property name="text">
-                       <string>X2</string>
+                       <string>X1</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -210,7 +210,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                        </font>
                       </property>
                       <property name="text">
-                       <string>X3</string>
+                       <string>X2</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -225,7 +225,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                        </font>
                       </property>
                       <property name="text">
-                       <string>Y2</string>
+                       <string>Y1</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -240,7 +240,7 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                        </font>
                       </property>
                       <property name="text">
-                       <string>Y3</string>
+                       <string>Y2</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -257,11 +257,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -284,11 +284,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -411,11 +411,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -438,11 +438,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -465,11 +465,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -489,11 +489,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -660,11 +660,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -690,11 +690,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -777,11 +777,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -804,11 +804,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -922,11 +922,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -949,11 +949,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -976,11 +976,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1000,11 +1000,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1171,11 +1171,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1201,11 +1201,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1288,11 +1288,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1315,11 +1315,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1433,11 +1433,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1460,11 +1460,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1487,11 +1487,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1511,11 +1511,11 @@ QGroupBox::title{subcontrol-origin: margin; subcontrol-position:top center;paddi
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>-1</pointsize>
+                        <pointsize>12</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QDoubleSpinBox{font-size: 14px; text-align: right}</string>
+                       <string notr="true"/>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
