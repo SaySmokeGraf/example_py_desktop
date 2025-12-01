@@ -5,7 +5,7 @@ import os.path
 from PIL import Image
 
 
-# константы для смены размера из конфига
+# константы для смены размера
 IMG_SIZES = (900, 506)
 PATH_IMG_ORIG = 'res/preview_img_orig.jpg'
 PATH_IMG_SIZED = 'res/preview_img_sized.png'
