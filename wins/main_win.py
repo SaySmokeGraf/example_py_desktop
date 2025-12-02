@@ -8,11 +8,13 @@ import pyqtgraph as pgraph
 
 from config import PATH_ICON
 from ui.mainGUI import Ui_MainWindow
+from utils.calc_thread import PlotCalcThread
 from utils.dataflow_manager import DataFlowManager
 from utils.graph_manager import GraphManager
 from utils.methods import (
     calculate_method_1, calculate_method_2, calculate_method_3
 )
+from wins.loading_overlay import LoadingOverlay
 
 
 class MainWindow(QMainWindow):
@@ -130,7 +132,7 @@ class MainWindow(QMainWindow):
             legend_checkbox=self._ui.check_legend_m3
         )
     
-    def _active_elems_enabled(self, enabled: bool) -> None:
+    def active_elems_enabled(self, enabled: bool) -> None:
         """Включение/выключение активных (интерактивных) элементов ГПИ.
 
         :param enabled: флаг включенности
@@ -141,12 +143,16 @@ class MainWindow(QMainWindow):
     def _plot_method(self, df_manager: DataFlowManager) -> None:
         """Построить график метода с помощью менеджера потока данных.
 
+        Запускает оверлей ожидания и отдельный поток для расчета и сообщения
+        результатов графику.
+
         :param df_manager: менеджер потока данных
         :type df_manager: DataFlowManager
         """
-        self._active_elems_enabled(False)
-        df_manager.plot_method()
-        self._active_elems_enabled(True)
+        loading_overlay = LoadingOverlay(self)
+        loading_overlay.show()
+        calc_thread = PlotCalcThread(self, loading_overlay, df_manager)
+        calc_thread.start()
 
 
 if __name__ == "__main__":
