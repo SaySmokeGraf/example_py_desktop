@@ -1,13 +1,13 @@
 """Модуль окна с заставкой."""
 
-from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QFrame
 
 from config import PATH_IMG_SIZED
 from ui.previewGUI import Ui_PreviewWindow
 
 
-class PreviewWindow(QtWidgets.QFrame):
+class PreviewWindow(QFrame):
     """Класс окна с заставкой."""
 
     def __init__(self) -> None:
