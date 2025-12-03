@@ -67,10 +67,9 @@ class MainWindow(QMainWindow):
         pgraph.setConfigOption('background', 'w')
         pgraph.setConfigOption('foreground', 'k')
 
-        # формируем список менеджеров графиков
+        # развертка графиков
         graph_managers = []
 
-        # пробежка по 3 методам с заменой лейблов
         for item in morph:
             item.layout.removeWidget(item.lbl)
             item.lbl.deleteLater()
@@ -79,7 +78,6 @@ class MainWindow(QMainWindow):
             item.layout.addWidget(new_graph)
             graph_managers.append(GraphManager(new_graph))
 
-        # возвращаем список менеджеров графиков
         return graph_managers
     
     def _setup_dataflow_managers(self,
