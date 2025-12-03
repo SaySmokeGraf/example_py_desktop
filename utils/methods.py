@@ -95,7 +95,6 @@ def calculate_method_1(X1: float, Y1: float, X2: float, Y2: float,
         for i in range(1, int(P) + 1):
             Xm, Ym = math.sin(angle) * (i * r), math.cos(angle) * (i * r)
             
-            # получение векторов
             v0 = [0 - Xm, 0 - Ym]
             v1 = [X1 - Xm, Y1 - Ym]
             v2 = [X2 - Xm, Y2 - Ym]
@@ -190,7 +189,6 @@ def calculate_method_2(X1: float, Y1: float, X2: float, Y2: float,
         for i in range(1, int(P) + 1):
             Xm, Ym = math.cos(angle) * (i * r), math.sin(angle) * (i * r)
 
-            # векторы
             v1 = [X1 - Xm, Y1 - Ym]
             v2 = [X2 - Xm, Y2 - Ym]
             
@@ -286,7 +284,6 @@ def calculate_method_3(X1: float, Y1: float, X2: float, Y2: float,
         for i in range(1, int(P) + 1):
             Xm, Ym = math.cos(angle) * (i * r), math.sin(angle) * (i * r)
 
-            # векторы
             v1 = [X1 - Xm, Y1 - Ym]
             v2 = [X2 - Xm, Y2 - Ym]
             

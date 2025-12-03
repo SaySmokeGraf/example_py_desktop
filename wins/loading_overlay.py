@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFrame, QWidget
 
-from config import PATH_LOADING_SIZED
+from config import PATH_IMG_LOADING
 from ui.loadingGUI import Ui_LoadingOverlay
 
 
@@ -19,9 +19,9 @@ class LoadingOverlay(QFrame):
         """
         super().__init__(parent)
 
-        self.ui = Ui_LoadingOverlay()
-        self.ui.setupUi(self)
-        self.ui.lbl_image.setPixmap(QPixmap(PATH_LOADING_SIZED))
+        self._ui = Ui_LoadingOverlay()
+        self._ui.setupUi(self)
+        self._ui.lbl_image.setPixmap(QPixmap(PATH_IMG_LOADING))
         self.setWindowFlags(Qt.WindowStaysOnTopHint |
                             Qt.FramelessWindowHint)
         
