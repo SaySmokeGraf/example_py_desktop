@@ -70,8 +70,7 @@ class MainWindow(QMainWindow):
         # формируем список менеджеров графиков
         graph_managers = []
 
-        # пробежка по 3 методам с заменой лейблов, созданных для этой цели, на
-        # графики с дальнейшей их разверткой и менеджерами графиков
+        # пробежка по 3 методам с заменой лейблов
         for item in morph:
             item.layout.removeWidget(item.lbl)
             item.lbl.deleteLater()
@@ -132,14 +131,6 @@ class MainWindow(QMainWindow):
             legend_checkbox=self._ui.check_legend_m3
         )
     
-    def active_elems_enabled(self, enabled: bool) -> None:
-        """Включение/выключение активных (интерактивных) элементов ГПИ.
-
-        :param enabled: флаг включенности
-        :type enabled: bool
-        """
-        self._ui.tabs_methods.setEnabled(enabled)
-    
     def _plot_method(self, df_manager: DataFlowManager) -> None:
         """Построить график метода с помощью менеджера потока данных.
 
@@ -153,6 +144,14 @@ class MainWindow(QMainWindow):
         loading_overlay.show()
         calc_thread = PlotCalcThread(self, loading_overlay, df_manager)
         calc_thread.start()
+    
+    def active_elems_enabled(self, enabled: bool) -> None:
+        """Включение/выключение активных (интерактивных) элементов ГПИ.
+
+        :param enabled: флаг включенности
+        :type enabled: bool
+        """
+        self._ui.tabs_methods.setEnabled(enabled)
 
 
 if __name__ == "__main__":
